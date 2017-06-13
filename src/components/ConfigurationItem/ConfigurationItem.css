@@ -1,0 +1,31 @@
+.itemName {
+    color: #414141;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    font-weight: 550;
+    letter-spacing: 0;
+    line-height: 1.875rem;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.description {
+    font-size: .7em;
+    margin: 3px;
+    width: 100%;
+    color: #414141;
+}
+
+.configurationItem {
+    min-height: 50px;
+    background-color: white;
+    padding: 2px;
+    display: inline-block;
+}
+
+.configurationItem a {
+    text-decoration: none;
+    outline: none;
+}
