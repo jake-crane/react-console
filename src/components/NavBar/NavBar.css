@@ -1,0 +1,16 @@
+.navBar {
+    display: inline-block;
+}
+
+.searchContainer {
+    margin-left: 5px;
+    display: inline-block;
+}
+
+.searchBox {
+    border-radius: 5px;
+    border: none;
+    height: 24px;
+    padding: 4px;
+    font-size: .7em;
+}

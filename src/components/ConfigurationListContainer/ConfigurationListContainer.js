@@ -1,5 +1,4 @@
 import React from "react";
-import '../ConfigurationList/Roboto.css'
 import './ConfigurationListContainer.css'
 import ConfigurationList from "../ConfigurationList/ConfigurationList";
 
@@ -13,6 +12,20 @@ export default class ConfigurationListContainer extends React.Component {
         this.setState(json);
     }
 
+    updateData(index, newData) {
+        var data = this.state.configurations.slice();
+        data[index - 1] = newData;
+        this.setState({
+            configurations: data
+        });
+        this.sendUpdate();
+    }
+
+    sendUpdate() {
+        var requestData = this.getRequestData();
+        console.log(requestData);
+    }
+
     handleXMLResponse(responseXMLText) {
         var doc = new DOMParser().parseFromString(responseXMLText, 'text/html');
         var configs = [];
@@ -21,13 +34,16 @@ export default class ConfigurationListContainer extends React.Component {
             var configKeyElement = doc.getElementById('clientConfig_key_' + i);
             var valueElement = doc.getElementById('clientConfig_value_' + i);
             var descriptionElement = doc.getElementById('applicationConfig_descr_' + i);
+            var idElement = doc.getElementById('applicationConfig_id_' + i);
             var config = {
                 name: nextDisplayElement.value,
                 keyName: configKeyElement.value,
                 value: valueElement.value,
                 description: descriptionElement.value,
                 type: 'null',
-                index: i
+                id: idElement.value,
+                index: i,
+                hidden: false
             };
             configs.push(config);
             nextDisplayElement = doc.getElementById('clientConfig_display_' + (i + 1));
@@ -39,12 +55,48 @@ export default class ConfigurationListContainer extends React.Component {
 
     componentDidMount() {
         fetch('/data.html')
-            .then(function (response) {
+            .then((response) => {
                 return response.text();
             }).then(this.handleXMLResponse.bind(this))
-            .catch(function (ex) {
+            .catch((ex) => {
                 console.log('parsing failed', ex);
             });
+    }
+
+    escapeStuff(string) {
+        return string.replace(new RegExp('\\s', 'g'), '+')
+            .replace(new RegExp(',', 'g'), '%2C')
+            .replace(new RegExp('\\(', 'g'), '%28')
+            .replace(new RegExp('\\)', 'g'), '%29');
+    }
+
+    getRequestData() {
+        var requestString = 'subScreen=divAppConfig&userID=&servlet=awdServer&applicationConfig_id_0=';
+        for (var i = 0; i < this.state.configurations.length; i++) {
+            var number = this.state.configurations[i].index;
+            requestString += '&applicationConfig_id_' + number + '=' + this.state.configurations[i].id
+                + '&applicationConfig_display_' + number + '=' + this.escapeStuff(this.state.configurations[i].name)
+                + '&applicationConfig_key_' + number + '=' + this.state.configurations[i].keyName
+                + '&applicationConfig_type_' + number + '=TEXT'
+                + '&applicationConfig_value_' + number + '=' + this.escapeStuff(this.state.configurations[i].value)
+                + '&applicationConfig_descr_' + number + '=' + this.escapeStuff(this.state.configurations[i].description);
+        }
+        return requestString;
+    }
+
+    filterItems(string) {
+        var connfigurationsCopy = this.state.configurations.slice();
+        for (var i = 0; i < connfigurationsCopy.length; i++) {
+            var config = connfigurationsCopy[i];
+            connfigurationsCopy.configurations[i] = config.name.contains(string)
+                || config.keyName.contains(string)
+                || config.value.contains(string)
+                || config.description.contains(string)
+                || config.type.contains(string);
+        }
+        this.setState({
+            configurations: connfigurationsCopy
+        });
     }
 
     render() {
@@ -59,18 +111,10 @@ export default class ConfigurationListContainer extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="configurationListContainer row">
-                    <ConfigurationList configs={array1} >
-
-                    </ConfigurationList>
-                    <ConfigurationList configs={array2}>
-
-                    </ConfigurationList>
-                    <ConfigurationList configs={array3}>
-
-                    </ConfigurationList>
-                    <ConfigurationList configs={array4}>
-
-                    </ConfigurationList>
+                    <ConfigurationList configs={array1} sendUpdate={this.updateData.bind(this)} />
+                    <ConfigurationList configs={array2} sendUpdate={this.updateData.bind(this)} />
+                    <ConfigurationList configs={array3} sendUpdate={this.updateData.bind(this)} />
+                    <ConfigurationList configs={array4} sendUpdate={this.updateData.bind(this)} />
                 </div>
             </div>
         );

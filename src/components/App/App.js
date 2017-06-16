@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import './Roboto.css';
 import './App.css';
 import ConfigurationListContainer from "../ConfigurationListContainer/ConfigurationListContainer";
+import NavBar from "../NavBar/NavBar";
 
 export default class App extends Component {
-  static loggedIn = false;
+
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <div>
+          <div className="headerContentContainer">
             <img src={logo} className="App-logo" alt="logo" />
-            <h2>AWD Configuration Console</h2>
+            <div className="inlineHeader">AWD Configuration Console</div>
+            <NavBar/>
           </div>
         </div>
-        <ConfigurationListContainer></ConfigurationListContainer>
+        <ConfigurationListContainer/>>
         <div>
         </div>
       </div>

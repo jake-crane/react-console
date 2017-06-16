@@ -1,7 +1,6 @@
 import React from "react";
 import './ConfigurationList.css';
 import ConfigurationItem from "../ConfigurationItem/ConfigurationItem";
-import './Roboto.css'
 
 export default class ConfigurationList extends React.Component {
 
@@ -14,7 +13,9 @@ export default class ConfigurationList extends React.Component {
                         keyName={data.keyName}
                         value={data.value}
                         description={data.description}
-                        index={data.index}></ConfigurationItem>
+                        id={data.id}
+                        index={data.index}
+                        sendUpdate={this.props.sendUpdate}/>
                 )}
             </div>
         );
