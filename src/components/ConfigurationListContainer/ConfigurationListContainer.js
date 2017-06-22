@@ -85,14 +85,15 @@ export default class ConfigurationListContainer extends React.Component {
     }
 
     filterItems(string) {
+        const uppercaseString = string.toUpperCase();
         var connfigurationsCopy = this.state.configurations.slice();
         for (var i = 0; i < connfigurationsCopy.length; i++) {
             var config = connfigurationsCopy[i];
             connfigurationsCopy[i].hidden = !(config.name.includes(string)
-                || config.keyName.includes(string)
-                || config.value.includes(string)
-                || config.description.includes(string)
-                || config.type.includes(string));
+                || config.keyName.toUpperCase().includes(uppercaseString)
+                || config.value.toUpperCase().includes(uppercaseString)
+                || config.description.toUpperCase().includes(uppercaseString)
+                || config.type.toUpperCase().includes(uppercaseString));
         }
         this.setState({
             configurations: connfigurationsCopy

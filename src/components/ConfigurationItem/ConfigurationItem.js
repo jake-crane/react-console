@@ -152,7 +152,7 @@ export default class ConfigurationItem extends React.Component {
                     ) :
                     (
                         <a className="editLink" href="#" onClick={this.handleClick.bind(this)}>
-                            <span className="itemName">{this.props.name}</span>
+                            <span className="itemName" title={this.props.keyName}>{this.props.name}</span>
                             <div className="description">{this.props.description}</div>
                         </a>
                     )
