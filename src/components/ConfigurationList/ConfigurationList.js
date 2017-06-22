@@ -15,7 +15,8 @@ export default class ConfigurationList extends React.Component {
                         description={data.description}
                         id={data.id}
                         index={data.index}
-                        sendUpdate={this.props.sendUpdate}/>
+                        sendUpdate={this.props.sendUpdate}
+                        hidden={data.hidden}/>
                 )}
             </div>
         );

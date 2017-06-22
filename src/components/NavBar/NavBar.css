@@ -1,3 +1,47 @@
+.navList {
+  list-style: none;
+  /*display: inline-block;*/
+  height: 100%;
+  margin-bottom: 0;
+  display: inline-flex;
+    display: -ms-flexbox;
+    flex: 1;
+    -ms-flex: 1
+}
+
+.navList li {
+  /*background-color: #835AD6;*/
+  display: inline-block;
+  height: 100%;
+}
+
+.navList a {
+  display: table;
+  height: 100%;
+  line-height: 100%;
+  padding: 10px;
+  color: #fff;
+  vertical-align: middle;
+}
+
+.navList a:hover {
+  /*background-color: #7243d0;*/
+  color: white;
+  text-decoration: none;
+}
+
+.navList a.selected {
+  /*background-color: #7243d0;*/
+  /*border-color: white;
+  border-width: 0 1px 0 1px;
+  border-style: solid;*/
+}
+
+.linkContent {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .navBar {
     display: inline-block;
 }

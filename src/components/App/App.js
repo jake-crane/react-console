@@ -7,6 +7,10 @@ import NavBar from "../NavBar/NavBar";
 
 export default class App extends Component {
 
+  getFilterItemsFn() {
+    return this.filterItems;
+  }
+
   render() {
     return (
       <div className="App">
@@ -14,10 +18,10 @@ export default class App extends Component {
           <div className="headerContentContainer">
             <img src={logo} className="App-logo" alt="logo" />
             <div className="inlineHeader">AWD Configuration Console</div>
-            <NavBar/>
+            <NavBar getFilterItemsFn={this.getFilterItemsFn.bind(this)} test="test" />
           </div>
         </div>
-        <ConfigurationListContainer/>>
+        <ConfigurationListContainer ref={(ref) => this.filterItems = ref.filterItems.bind(ref)} />
         <div>
         </div>
       </div>

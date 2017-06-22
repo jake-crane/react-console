@@ -88,17 +88,17 @@ export default class ConfigurationListContainer extends React.Component {
         var connfigurationsCopy = this.state.configurations.slice();
         for (var i = 0; i < connfigurationsCopy.length; i++) {
             var config = connfigurationsCopy[i];
-            connfigurationsCopy.configurations[i] = config.name.contains(string)
-                || config.keyName.contains(string)
-                || config.value.contains(string)
-                || config.description.contains(string)
-                || config.type.contains(string);
+            connfigurationsCopy[i].hidden = !(config.name.includes(string)
+                || config.keyName.includes(string)
+                || config.value.includes(string)
+                || config.description.includes(string)
+                || config.type.includes(string));
         }
         this.setState({
             configurations: connfigurationsCopy
         });
     }
-
+    
     render() {
         const listLength = this.state.configurations.length;
         const itemsPerContainer = listLength / 4;

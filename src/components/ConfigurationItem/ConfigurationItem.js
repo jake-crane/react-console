@@ -115,7 +115,7 @@ export default class ConfigurationItem extends React.Component {
 
     render() {
         return (
-            <div className="configurationItem ">
+            <div className="configurationItem " hidden={this.props.hidden}>
                 {this.state.editMode ?
                     (
                         <div>

@@ -4,7 +4,9 @@ import './NavBar.css';
 export default class NavBar extends React.Component {
 
     onSearchKeypress(e) {
-        this.props.search(e.target.value);
+        const fn = this.props.getFilterItemsFn();
+        if (fn)
+            fn(e.target.value);
     }
 
     render() {
@@ -24,8 +26,8 @@ export default class NavBar extends React.Component {
                         <a href="#"><span className="linkContent">Audit</span></a>
                     </li>
                 </ul>
-                <div className="searchContainer"><input type="text" className="searchBox" placeholder="Search" 
-                    onChange={this.onSearchKeypress.bind(this)}/></div>
+                <div className="searchContainer"><input type="text" className="searchBox" placeholder="Search"
+                    onChange={this.onSearchKeypress.bind(this)} /></div>
             </div>
         );
     }
