@@ -54,7 +54,7 @@ export default class ConfigurationListContainer extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/data.html')
+        fetch('./data.html')
             .then((response) => {
                 return response.text();
             }).then(this.handleXMLResponse.bind(this))
