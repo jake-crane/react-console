@@ -12,9 +12,19 @@ export default class ConfigurationListContainer extends React.Component {
         this.setState(json);
     }
 
-    updateData(index, newData) {
+    getIndexOfConfiguration(key) {
+        for (var i = 0; i < this.state.configurations.length; i++) {
+            if (this.state.configurations[i].key === key) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    updateData(newData) {
         var data = this.state.configurations.slice();
-        data[index - 1] = newData;
+        var index = this.getIndexOfConfiguration(newData.keyName);
+        data[index] = newData;
         this.setState({
             configurations: data
         });
@@ -22,84 +32,45 @@ export default class ConfigurationListContainer extends React.Component {
     }
 
     sendUpdate() {
-        var requestData = this.getRequestData();
-        console.log(requestData);
+        console.log(this.state);
     }
 
-    handleXMLResponse(responseXMLText) {
-        var doc = new DOMParser().parseFromString(responseXMLText, 'text/html');
-        var configs = [];
-        var nextDisplayElement = doc.getElementById('clientConfig_display_1');
-        for (var i = 1; nextDisplayElement; i++) {
-            var configKeyElement = doc.getElementById('clientConfig_key_' + i);
-            var valueElement = doc.getElementById('clientConfig_value_' + i);
-            var descriptionElement = doc.getElementById('applicationConfig_descr_' + i);
-            var idElement = doc.getElementById('applicationConfig_id_' + i);
-            var config = {
-                name: nextDisplayElement.value,
-                keyName: configKeyElement.value,
-                value: valueElement.value,
-                description: descriptionElement.value,
-                type: 'null',
-                id: idElement.value,
-                index: i,
-                hidden: false
-            };
-            configs.push(config);
-            nextDisplayElement = doc.getElementById('clientConfig_display_' + (i + 1));
-        }
-        this.setState({
-            configurations: configs
-        });
+    handleJSONResponse(data) {
+        this.setState(data);
     }
 
     componentDidMount() {
-        fetch('./data.html')
-            .then((response) => {
-                return response.text();
-            }).then(this.handleXMLResponse.bind(this))
-            .catch((ex) => {
-                console.log('parsing failed', ex);
+        fetch('./configurations.json')
+            .then((response) => response.json())
+            .then(this.handleJSONResponse.bind(this))
+            .catch((error) => {
+                console.error(error);
             });
     }
 
-    escapeStuff(string) {
-        return string.replace(new RegExp('\\s', 'g'), '+')
-            .replace(new RegExp(',', 'g'), '%2C')
-            .replace(new RegExp('\\(', 'g'), '%28')
-            .replace(new RegExp('\\)', 'g'), '%29');
-    }
-
-    getRequestData() {
-        var requestString = 'subScreen=divAppConfig&userID=&servlet=awdServer&applicationConfig_id_0=';
-        for (var i = 0; i < this.state.configurations.length; i++) {
-            var number = this.state.configurations[i].index;
-            requestString += '&applicationConfig_id_' + number + '=' + this.state.configurations[i].id
-                + '&applicationConfig_display_' + number + '=' + this.escapeStuff(this.state.configurations[i].name)
-                + '&applicationConfig_key_' + number + '=' + this.state.configurations[i].keyName
-                + '&applicationConfig_type_' + number + '=TEXT'
-                + '&applicationConfig_value_' + number + '=' + this.escapeStuff(this.state.configurations[i].value)
-                + '&applicationConfig_descr_' + number + '=' + this.escapeStuff(this.state.configurations[i].description);
-        }
-        return requestString;
+    stringContainsIgnoreCase(s1, s2) {
+        return s1 === s2 
+            || (s1 && s2
+                && s1.toUpperCase().indexOf(s2.toUpperCase()) > -1);
     }
 
     filterItems(string) {
-        const uppercaseString = string.toUpperCase();
         var connfigurationsCopy = this.state.configurations.slice();
         for (var i = 0; i < connfigurationsCopy.length; i++) {
             var config = connfigurationsCopy[i];
-            connfigurationsCopy[i].hidden = !(config.name.includes(string)
-                || config.keyName.toUpperCase().includes(uppercaseString)
-                || config.value.toUpperCase().includes(uppercaseString)
-                || config.description.toUpperCase().includes(uppercaseString)
-                || config.type.toUpperCase().includes(uppercaseString));
+            connfigurationsCopy[i].hidden = !(
+                this.stringContainsIgnoreCase(config.name, string)
+                || this.stringContainsIgnoreCase(config.key, string)
+                || this.stringContainsIgnoreCase(config.value, string)
+                || this.stringContainsIgnoreCase(config.description, string)
+                || this.stringContainsIgnoreCase(config.type, string)
+            );
         }
         this.setState({
             configurations: connfigurationsCopy
         });
     }
-    
+
     render() {
         const listLength = this.state.configurations.length;
         const itemsPerContainer = listLength / 4;

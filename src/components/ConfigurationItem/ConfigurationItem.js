@@ -22,13 +22,6 @@ export default class ConfigurationItem extends React.Component {
         });
     }
 
-    getLargeColIndex() {
-        if (this.props.index < 20) {
-            return 1;
-        }
-        return 2;
-    }
-
     clearTempData() {
         this.setState({
             editMode: false,
@@ -61,7 +54,7 @@ export default class ConfigurationItem extends React.Component {
             id: this.props.id,
             index: this.props.index
         };
-        this.props.sendUpdate(this.props.index, updatedData);
+        this.props.sendUpdate(updatedData);
         this.clearTempData();
     }
 
@@ -119,6 +112,8 @@ export default class ConfigurationItem extends React.Component {
                 {this.state.editMode ?
                     (
                         <div>
+                            <span>Key: </span>
+                            <span>{this.props.keyName}</span>
                             <div>Name</div>
                             <input
                                 className="itemName"
@@ -152,7 +147,7 @@ export default class ConfigurationItem extends React.Component {
                     ) :
                     (
                         <a className="editLink" href="#" onClick={this.handleClick.bind(this)}>
-                            <span className="itemName" title={this.props.keyName}>{this.props.name}</span>
+                            <span className="itemName" title={this.props.keyName}>{this.props.name || this.props.keyName}</span>
                             <div className="description">{this.props.description}</div>
                         </a>
                     )

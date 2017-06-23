@@ -8,13 +8,13 @@ export default class ConfigurationList extends React.Component {
         return (
             <div className="configurationList">
                 {this.props.configs.map(data =>
-                    <ConfigurationItem key={data.keyName}
+                    <ConfigurationItem key={data.key}
+                        keyName={data.key}
                         name={data.name}
-                        keyName={data.keyName}
                         value={data.value}
+                        type={data.type}
                         description={data.description}
                         id={data.id}
-                        index={data.index}
                         sendUpdate={this.props.sendUpdate}
                         hidden={data.hidden}/>
                 )}
