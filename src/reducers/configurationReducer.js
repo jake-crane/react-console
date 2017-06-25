@@ -25,14 +25,27 @@ export default function reducer(state = {
         case 'ADD_CONFIGURATION': {
             return {
                 ...state,
-                Configurations: [...state.configurations, action.payload],
+                configurations: [...state.configurations, action.payload],
             };
         }
-        case 'UPDATE_CONFIGURATION': {
-            debugger;
+        case 'EDIT_CONFIGURATION': {
+            const newConfigurations = [...state.configurations];
+            const updateIndex = newConfigurations.findIndex(configuration => configuration.id === action.payload);
+            if (updateIndex > -1)
+                newConfigurations[updateIndex].editMode = true;
+            return { ...state, configurations: newConfigurations };
+        }
+        case 'CANCEL_CONFIGURATION_EDIT': {
+            const newConfigurations = [...state.configurations];
+            const updateIndex = newConfigurations.findIndex(configuration => configuration.id === action.payload);
+            if (updateIndex > -1)
+                newConfigurations[updateIndex].editMode = false;
+            return { ...state, configurations: newConfigurations };
+        }
+        case 'UPDATE_CONFIGURATION_FULFILLED': {
             const newConfigurations = [...state.configurations];
             const updateIndex = newConfigurations.findIndex(configuration => configuration.id === action.payload.id);
-            if (updateIndex > 0)
+            if (updateIndex > -1)
                 newConfigurations[updateIndex] = action.payload;
             return { ...state, configurations: newConfigurations };
         }

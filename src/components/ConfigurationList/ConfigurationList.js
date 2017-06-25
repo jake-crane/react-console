@@ -15,7 +15,8 @@ export default class ConfigurationList extends React.Component {
                         type={data.type}
                         description={data.description}
                         id={data.id}
-                        hidden={data.hidden}/>
+                        editMode={data.editMode}
+                        hidden={data.hidden} />
                 )}
             </div>
         );

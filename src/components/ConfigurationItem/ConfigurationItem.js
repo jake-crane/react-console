@@ -1,15 +1,14 @@
 import React from "react";
 import './ConfigurationItem.css';
 import { connect } from 'react-redux';
-import {updateConfiguration} from '../../actions/configurationActions';
+import {editConfiguration, cancelConfigurationEdit, updateConfiguration} from '../../actions/configurationActions';
 
 class ConfigurationItem extends React.Component {
 
     state = {
-        editMode: false,
         tempData: {
             name: null,
-            keyName: null,
+            key: null,
             value: null,
             description: null,
             type: null,
@@ -18,17 +17,14 @@ class ConfigurationItem extends React.Component {
     };
 
     handleClick(e) {
-        this.setState({
-            editMode: true
-        });
+        this.props.editConfiguration(this.props.id);
     }
 
     clearTempData() {
         this.setState({
-            editMode: false,
             tempData: {
                 name: null,
-                keyName: null,
+                key: null,
                 value: null,
                 description: null,
                 type: null,
@@ -39,15 +35,13 @@ class ConfigurationItem extends React.Component {
 
     handleCancel(e) {
         this.clearTempData();
+        this.props.cancelConfigurationEdit(this.props.id);
     }
 
     handleUpdate(e) {
-        this.setState({
-            editMode: false
-        });
         var updatedData = {
             name: this.state.tempData.name || this.props.name,
-            keyName: this.state.tempData.keyName || this.props.keyName,
+            key: this.state.tempData.key || this.props.keyName,
             value: this.state.tempData.value || this.props.value,
             description: this.state.tempData.description || this.props.description,
             type: this.state.tempData.type || this.props.type,
@@ -59,10 +53,9 @@ class ConfigurationItem extends React.Component {
 
     handleNameChange(e) {
         var newState = {
-            editMode: this.state.editMode,
             tempData: {
                 name: e.target.value,
-                keyName: this.state.tempData.keyName,
+                key: this.state.tempData.key,
                 value: this.state.tempData.value,
                 description: this.state.tempData.description,
                 type: this.state.tempData.type,
@@ -74,10 +67,9 @@ class ConfigurationItem extends React.Component {
 
     handleValueChange(e) {
         var newState = {
-            editMode: this.state.editMode,
             tempData: {
                 name: this.state.tempData.name,
-                keyName: this.state.tempData.keyName,
+                key: this.state.tempData.key,
                 value: e.target.value,
                 description: this.state.tempData.description,
                 type: this.state.tempData.type,
@@ -89,10 +81,9 @@ class ConfigurationItem extends React.Component {
 
     handleDescriptionChange(e) {
         var newState = {
-            editMode: this.state.editMode,
             tempData: {
                 name: this.state.tempData.name,
-                keyName: this.state.tempData.keyName,
+                key: this.state.tempData.key,
                 value: this.state.tempData.value,
                 description: e.target.value,
                 type: this.state.tempData.type,
@@ -105,7 +96,7 @@ class ConfigurationItem extends React.Component {
     render() {
         return (
             <div className="configurationItem" hidden={this.props.hidden ? 'hidden' : null}>
-                {this.state.editMode ?
+                {this.props.editMode ?
                     (
                         <div>
                             <span>Key: </span>
@@ -161,6 +152,8 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        editConfiguration: (configurationId) => dispatch(editConfiguration(configurationId)),
+        cancelConfigurationEdit: (configurationId) => dispatch(cancelConfigurationEdit(configurationId)),
         updateConfiguration: (configuration) => dispatch(updateConfiguration(configuration))
     };
 };
