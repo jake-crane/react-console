@@ -1,7 +1,9 @@
 import React from "react";
 import './ConfigurationItem.css';
+import { connect } from 'react-redux';
+import {updateConfiguration} from '../../actions/configurationActions';
 
-export default class ConfigurationItem extends React.Component {
+class ConfigurationItem extends React.Component {
 
     state = {
         editMode: false,
@@ -11,8 +13,7 @@ export default class ConfigurationItem extends React.Component {
             value: null,
             description: null,
             type: null,
-            id: null,
-            index: null
+            id: null
         }
     };
 
@@ -31,8 +32,7 @@ export default class ConfigurationItem extends React.Component {
                 value: null,
                 description: null,
                 type: null,
-                id: null,
-                index: null
+                id: null
             }
         });
     }
@@ -51,10 +51,9 @@ export default class ConfigurationItem extends React.Component {
             value: this.state.tempData.value || this.props.value,
             description: this.state.tempData.description || this.props.description,
             type: this.state.tempData.type || this.props.type,
-            id: this.props.id,
-            index: this.props.index
+            id: this.props.id
         };
-        this.props.sendUpdate(updatedData);
+        this.props.updateConfiguration(updatedData);
         this.clearTempData();
     }
 
@@ -67,8 +66,7 @@ export default class ConfigurationItem extends React.Component {
                 value: this.state.tempData.value,
                 description: this.state.tempData.description,
                 type: this.state.tempData.type,
-                id: this.props.id,
-                index: this.props.index
+                id: this.props.id
             }
         };
         this.setState(newState);
@@ -83,8 +81,7 @@ export default class ConfigurationItem extends React.Component {
                 value: e.target.value,
                 description: this.state.tempData.description,
                 type: this.state.tempData.type,
-                id: this.props.id,
-                index: this.props.index
+                id: this.props.id
             }
         };
         this.setState(newState);
@@ -99,8 +96,7 @@ export default class ConfigurationItem extends React.Component {
                 value: this.state.tempData.value,
                 description: e.target.value,
                 type: this.state.tempData.type,
-                id: this.props.id,
-                index: this.props.index
+                id: this.props.id
             }
         };
         this.setState(newState);
@@ -108,7 +104,7 @@ export default class ConfigurationItem extends React.Component {
 
     render() {
         return (
-            <div className="configurationItem " hidden={this.props.hidden}>
+            <div className="configurationItem" hidden={this.props.hidden ? 'hidden' : null}>
                 {this.state.editMode ?
                     (
                         <div>
@@ -156,3 +152,20 @@ export default class ConfigurationItem extends React.Component {
         );
     }
 }
+
+function mapStateToProps(store) {
+    return {
+        configurations: store.configurationReducer.configurations,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        updateConfiguration: (configuration) => dispatch(updateConfiguration(configuration))
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ConfigurationItem);

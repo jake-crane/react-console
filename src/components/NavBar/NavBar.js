@@ -1,12 +1,12 @@
 import React from "react";
 import './NavBar.css';
+import { filterConfigurations } from '../../actions/configurationActions';
+import { connect } from 'react-redux';
 
-export default class NavBar extends React.Component {
+class NavBar extends React.Component {
 
     onSearchKeypress(e) {
-        const fn = this.props.getFilterItemsFn();
-        if (fn)
-            fn(e.target.value);
+        this.props.filterConfigurations(e.target.value);
     }
 
     render() {
@@ -32,3 +32,20 @@ export default class NavBar extends React.Component {
         );
     }
 }
+
+function mapStateToProps(store) {
+    return {
+        configurations: store.configurationReducer.configurations,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        filterConfigurations: (text) => dispatch(filterConfigurations(text))
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NavBar);
