@@ -61,9 +61,7 @@ export default function reducer(state = {
 };
 
 function stringContainsIgnoreCase(s1, s2) {
-    return s1 === s2
-        || (s1 && s2
-            && s1.toUpperCase().indexOf(s2.toUpperCase()) > -1);
+    return s1 && (s2 || s2 === '') && s1.toUpperCase().indexOf(s2.toUpperCase()) > -1;
 }
 
 function filterItems(currentConfigurations, string) {
