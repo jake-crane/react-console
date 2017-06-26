@@ -1,5 +1,6 @@
 import React from "react";
 import './NavBar.css';
+import logo from './logo.svg';
 import { filterConfigurations } from '../../actions/configurationActions';
 import { connect } from 'react-redux';
 
@@ -11,24 +12,36 @@ class NavBar extends React.Component {
 
     render() {
         return (
-            <div className="navBar">
-                <ul className="navList">
-                    <li>
-                        <a href="#" className="selected"><span className="linkContent">Configuration</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="linkContent">Actions</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="linkContent">Metrics</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span className="linkContent">Audit</span></a>
-                    </li>
-                </ul>
-                <div className="searchContainer"><input type="text" className="searchBox" placeholder="Search"
-                    onChange={this.onSearchKeypress.bind(this)} /></div>
-            </div>
+            <nav className="navbar navbar-default navbar-fixed-top">
+                <div className="container">
+                    <div className="navbar-header">
+                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span className="sr-only">Toggle navigation</span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                        </button>
+                        <a className="navbar-brand" href="#">
+                            {/*<img src={logo} className="App-logo" alt="logo" />*/}
+                            AWD Configuration Console
+                        </a>
+                    </div>
+                    <div id="navbar" className="navbar-collapse collapse">
+                        <ul className="nav navbar-nav">
+                            <li className="active"><a href="#">Configuration</a></li>
+                            <li><a href="#">Actions</a></li>
+                            <li><a href="#">Metrics</a></li>
+                            <li><a href="#">Audit</a></li>
+                        </ul>
+                    </div>
+                    {/*<div className="searchContainer">
+                        <input type="text"
+                            className="searchBox"
+                            placeholder="Search"
+                            onChange={this.onSearchKeypress.bind(this)} />
+                    </div>*/}
+                </div>
+            </nav>
         );
     }
 }

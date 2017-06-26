@@ -1,3 +1,26 @@
+.App .navbar-default {
+  background-color: rgb(147, 112, 219);
+}
+
+.App .navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+  color: white;
+  background-color: rgb(164, 129, 236);
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40px;
+  display: inline-block;
+}
+
 .navList {
   list-style: none;
   /*display: inline-block;*/
