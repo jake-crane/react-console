@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export function updateConfiguration(configuration) {
     return (dispatch) => {
+        //http://linjborasp8/awdServer/awd/config/services/v1/console/configurations
         axios.put('./configurations', configuration)
             .then((response) => {
                 dispatch(updateConfigurationFulfilled(configuration));

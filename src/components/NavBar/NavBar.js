@@ -22,8 +22,8 @@ class NavBar extends React.Component {
                             <span className="icon-bar"></span>
                         </button>
                         <a className="navbar-brand" href="#">
-                            {/*<img src={logo} className="App-logo" alt="logo" />*/}
-                            AWD Configuration Console
+                            <img src={logo} className="App-logo" alt="logo" />
+                            <span>AWD Configuration Console</span>
                         </a>
                     </div>
                     <div id="navbar" className="navbar-collapse collapse">

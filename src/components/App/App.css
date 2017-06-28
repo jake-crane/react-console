@@ -2,6 +2,11 @@ html, body {
   background-color: #E6E6FA;
 }
 
+body {
+  min-height: 2000px;
+  padding-top: 50px;
+}
+
 .App {
   text-align: center;
   font-family: Roboto,Arial,Helvetica,sans-serif;

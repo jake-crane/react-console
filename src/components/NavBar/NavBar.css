@@ -15,10 +15,13 @@
   color: white;
 }
 
+.navbar-brand>img {
+    display: inline-block;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40px;
-  display: inline-block;
 }
 
 .navList {
