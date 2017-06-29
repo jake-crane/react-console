@@ -22,6 +22,8 @@
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40px;
+  float: left;
+  margin-top: -10px;
 }
 
 .navList {
@@ -83,4 +85,12 @@
     height: 24px;
     padding: 4px;
     font-size: .7em;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: rgb(164, 129, 236);
 }
