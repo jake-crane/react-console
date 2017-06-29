@@ -95,7 +95,7 @@ class ConfigurationItem extends React.Component {
 
     render() {
         return (
-            <div className="configurationItem" hidden={this.props.hidden ? 'hidden' : null}>
+            <div className={"configurationItem" + ( this.props.hidden ? ' hidden' : '' )}>
                 {this.props.editMode ?
                     (
                         <div>
