@@ -33,13 +33,13 @@ class NavBar extends React.Component {
                             <li><a href="#">Metrics</a></li>
                             <li><a href="#">Audit</a></li>
                         </ul>
+                        <form className="navbar-form navbar-left">
+                            <input type="text"
+                                className="form-control"
+                                placeholder="Search..."
+                                onChange={this.onSearchKeypress.bind(this)} />
+                        </form>
                     </div>
-                    {/*<div className="searchContainer">
-                        <input type="text"
-                            className="searchBox"
-                            placeholder="Search"
-                            onChange={this.onSearchKeypress.bind(this)} />
-                    </div>*/}
                 </div>
             </nav>
         );
