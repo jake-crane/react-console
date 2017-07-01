@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ConfigurationListContainer from "../ConfigurationListContainer/ConfigurationListContainer";
+import ConfigurationContainer from "../ConfigurationContainer/ConfigurationContainer";
 import NavBar from "../NavBar/NavBar";
 
 export default class App extends Component {
@@ -8,7 +8,10 @@ export default class App extends Component {
     return (
       <div className="App">
         <NavBar />
-        <ConfigurationListContainer />
+
+        <div className="container-fluid">
+          <ConfigurationContainer />
+        </div>
       </div>
     );
   }

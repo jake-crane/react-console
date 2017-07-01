@@ -31,11 +31,19 @@ textarea.value {
     height: 110px;
 }
 
+.readonly {
+    height: 75px;
+}
+
 .configurationItem {
-    min-height: 50px;
+    width: 400px;
     background-color: white;
     padding: 2px;
-    display: inline-block;
+    float: left;
+    margin: 0 7px 0 7px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    border-bottom: 1px solid rgb(224, 224, 224);
 }
 
 .configurationItem a {
