@@ -4,12 +4,12 @@ html, body {
 
 body {
   min-height: 2000px;
-  padding-top: 50px;
+  padding-top: 55px;
 }
 
 .App {
-  text-align: center;
-  font-family: Roboto,Arial,Helvetica,sans-serif;
+  /*text-align: center;
+  font-family: Roboto,Arial,Helvetica,sans-serif;*/
   color: rgb(65, 65, 65);
 }
 
@@ -44,4 +44,12 @@ body {
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+input[type=checkbox].modalCheckBox {
+  margin-left: 5px;
+}
+
+.configurationOptions {
+  float: right;
 }

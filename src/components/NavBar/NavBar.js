@@ -48,7 +48,7 @@ class NavBar extends React.Component {
 
 function mapStateToProps(store) {
     return {
-        configurations: store.configurationReducer.configurations,
+        configurationView: store.configurationReducer.configurationView
     };
 }
 

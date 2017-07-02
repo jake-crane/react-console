@@ -1,0 +1,72 @@
+.tileConfigurationItem .itemName {
+    color: #414141;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    font-weight: 550;
+    letter-spacing: 0;
+    line-height: 1.875rem;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.tileConfigurationItem input.itemName {
+    width: 100%;
+}
+
+.tileConfigurationItem div.description {
+    font-size: .7em;
+    margin: 3px;
+    width: 100%;
+    color: #414141;
+}
+
+.tileConfigurationItem textarea.description {
+    width: 100%;
+}
+
+.tileConfigurationItem textarea.value {
+    width: 100%;
+    height: 110px;
+}
+
+.tileConfigurationItem.readonly {
+    height: 75px;
+}
+
+.tileConfigurationItem {
+    width: 400px;
+    background-color: white;
+    padding: 2px;
+    float: left;
+    margin: 0 7px 0 7px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.tileConfigurationItem a {
+    text-decoration: none;
+    outline: none;
+}
+
+.tileConfigurationItem .cancel {
+    float: left;
+}
+
+.tileConfigurationItem .update {
+    float: right;
+}
+
+.tileConfigurationItem .buttonContainer {
+   overflow: hidden;
+}
+
+.tileConfigurationItem .editLink {
+    display: block;
+}
+
+.tileConfigurationItem .itemType {
+    margin-bottom: 4px;
+}

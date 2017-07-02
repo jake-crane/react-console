@@ -1,20 +1,21 @@
 import React from "react";
-import './ConfigurationContainer.css'
+import './TileConfigurationContainer.css'
 import { fetchConfigurations } from '../../actions/configurationActions';
 import { connect } from 'react-redux';
-import ConfigurationItem from "../ConfigurationItem/ConfigurationItem";
+import TileConfigurationItem from "../TileConfigurationItem/TileConfigurationItem";
 
 class ConfigurationListContainer extends React.Component {
 
     componentDidMount() {
-        this.props.fetchConfigurations();
+        if (this.props.configurations.length === 0)
+            this.props.fetchConfigurations();
     }
 
     render() {
         return (
             <div className="configurationListContainer">
                 {this.props.configurations.map(data =>
-                    <ConfigurationItem key={data.key}
+                    <TileConfigurationItem key={data.key}
                         keyName={data.key}
                         name={data.name}
                         value={data.value}

@@ -85,3 +85,10 @@ export function filterConfigurations(text) {
         payload: text
     };
 }
+
+export function changeConfigurationView(newView) {
+    return {
+        type: 'CHANGE_CONFIGURATION_VIEW',
+        payload: newView
+    };
+}

@@ -1,0 +1,15 @@
+.listConfigurationItem a {
+    display: block;
+    text-decoration: none;
+    outline: none;
+    color: rgb(65, 65, 65);
+}
+
+.listConfigurationItem button {
+    margin: 1px;
+}
+
+ textarea {
+    width: 100%;
+    height: 100%;
+}

@@ -2,7 +2,8 @@ export default function reducer(state = {
     configurations: [],
     fetching: false,
     fetched: false,
-    error: null
+    error: null,
+    configurationView: 'table'
 }, action) {
     switch (action.type) {
         case 'FILTER_CONFIGURATIONS': {
@@ -54,6 +55,9 @@ export default function reducer(state = {
                 ...state,
                 configurations: state.configurations.filter(configuration => configuration.id !== action.payload)
             };
+        }
+        case 'CHANGE_CONFIGURATION_VIEW': {
+            return { ...state, configurationView: action.payload };
         }
         default:
             return state;
