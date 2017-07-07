@@ -1,5 +1,6 @@
 import React from "react";
 import { editConfiguration, cancelConfigurationEdit, updateConfiguration } from '../../actions/configurationActions';
+import ConfigurationEditModal from "../ConfigurationEditModal/ConfigurationEditModal";
 
 export default class ConfigurationItemBase extends React.Component {
 
@@ -103,6 +104,24 @@ export default class ConfigurationItemBase extends React.Component {
             }
         };
         this.setState(newState);
+    }
+
+    getConfigurationEditModal() {
+        return (<ConfigurationEditModal
+            isOpen={this.props.editMode && this.props.editWithModal}
+            handleCancel={this.handleCancel.bind(this)}
+            handleUpdate={this.handleUpdate.bind(this)}
+            handleNameChange={this.handleNameChange.bind(this)}
+            handleValueChange={this.handleValueChange.bind(this)}
+            handleDescriptionChange={this.handleDescriptionChange.bind(this)}
+            handleTypeChange={this.handleTypeChange.bind(this)}
+            keyName={this.props.keyName}
+            name={this.props.name}
+            value={this.props.value}
+            description={this.props.description}
+            type={this.props.type}
+            tempData={this.state.tempData}
+        />);
     }
 
     static mapStateToProps(store) {

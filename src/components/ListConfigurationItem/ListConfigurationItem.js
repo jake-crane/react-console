@@ -2,7 +2,6 @@ import React from "react";
 import './ListConfigurationItem.css';
 import { connect } from 'react-redux';
 import ConfigurationItemBase from '../ConfigurationItemBase/ConfigurationItemBase';
-import ConfigurationEditModal from "../ConfigurationEditModal/ConfigurationEditModal";
 
 class ListConfigurationItem extends ConfigurationItemBase {
 
@@ -54,21 +53,7 @@ class ListConfigurationItem extends ConfigurationItemBase {
                             <button className="btn btn-primary btn-xs glyphicon glyphicon-pencil" onClick={this.handleClick.bind(this)}></button>
                         </td>
                         <td hidden>
-                           <ConfigurationEditModal
-                                isOpen={this.props.editMode && this.props.editWithModal}
-                                handleCancel={this.handleCancel.bind(this)}
-                                handleUpdate={this.handleUpdate.bind(this)}
-                                handleNameChange={this.handleNameChange.bind(this)}
-                                handleValueChange={this.handleValueChange.bind(this)}
-                                handleDescriptionChange={this.handleDescriptionChange.bind(this)}
-                                handleTypeChange={this.handleTypeChange.bind(this)}
-                                keyName={this.props.keyName}
-                                name={this.props.name}
-                                value={this.props.value}
-                                description={this.props.description}
-                                type={this.props.type}
-                                tempData={this.state.tempData}
-                            />
+                           {this.getConfigurationEditModal()}
                         </td>
                     </tr>
                 )
