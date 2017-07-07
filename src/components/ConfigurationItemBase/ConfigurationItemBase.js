@@ -108,6 +108,7 @@ export default class ConfigurationItemBase extends React.Component {
     static mapStateToProps(store) {
         return {
             configurations: store.configurationReducer.configurations,
+            editWithModal: store.configurationReducer.editWithModal
         };
     }
 

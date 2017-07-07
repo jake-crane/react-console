@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeConfigurationView } from '../../actions/configurationActions';
+import { changeConfigurationView, changeModalEdit } from '../../actions/configurationActions';
 import './App.css';
 import TileConfigurationContainer from "../TileConfigurationContainer/TileConfigurationContainer";
 import ListConfigurationItemContainer from "../ListConfigurationItemContainer/ListConfigurationItemContainer";
@@ -10,6 +10,10 @@ class App extends Component {
 
   handleViewSelectionChange(e) {
     this.props.changeConfigurationView(e.target.value);
+  }
+
+  handleModalEditChange(e) {
+    this.props.changeModalEdit(e.target.checked);
   }
 
   render() {
@@ -23,7 +27,8 @@ class App extends Component {
               <option value="tile">Tile View</option>
             </select>
             <label>
-              <input className="modalCheckBox" type="checkbox" />
+              <input className="modalCheckBox" type="checkbox"
+                value={this.props.editWithModal} onChange={this.handleModalEditChange.bind(this)} />
               <span>Modal Editor</span>
             </label>
           </span>
@@ -46,7 +51,8 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeConfigurationView: (newView) => dispatch(changeConfigurationView(newView))
+    changeConfigurationView: (newView) => dispatch(changeConfigurationView(newView)),
+    changeModalEdit: (val) => dispatch(changeModalEdit(val))
   };
 };
 

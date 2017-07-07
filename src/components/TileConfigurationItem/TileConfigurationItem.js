@@ -2,11 +2,12 @@ import React from "react";
 import './TileConfigurationItem.css';
 import { connect } from 'react-redux';
 import ConfigurationItemBase from '../ConfigurationItemBase/ConfigurationItemBase'
+import ConfigurationEditModal from "../ConfigurationEditModal/ConfigurationEditModal";
 
 class TileConfigurationItem extends ConfigurationItemBase {
 
     render() {
-        return this.props.editMode ?
+        return this.props.editMode && !this.props.editWithModal ?
             (
                 <div className="tileConfigurationItem" hidden={this.props.hidden}>
                     <span>Key: </span>
@@ -56,6 +57,21 @@ class TileConfigurationItem extends ConfigurationItemBase {
                         <span className="itemName" title={this.props.keyName}>{this.props.name || this.props.keyName}</span>
                         <div className="description">{this.props.description}</div>
                     </a>
+                    <ConfigurationEditModal
+                        isOpen={this.props.editMode && this.props.editWithModal}
+                        handleCancel={this.handleCancel.bind(this)}
+                        handleUpdate={this.handleUpdate.bind(this)}
+                        handleNameChange={this.handleNameChange.bind(this)}
+                        handleValueChange={this.handleValueChange.bind(this)}
+                        handleDescriptionChange={this.handleDescriptionChange.bind(this)}
+                        handleTypeChange={this.handleTypeChange.bind(this)}
+                        keyName={this.props.keyName}
+                        name={this.props.name}
+                        value={this.props.name}
+                        description={this.props.description}
+                        type={this.props.type}
+                        tempData={this.state.tempData}
+                    />
                 </div>
             );
     }

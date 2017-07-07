@@ -3,7 +3,8 @@ export default function reducer(state = {
     fetching: false,
     fetched: false,
     error: null,
-    configurationView: 'table'
+    configurationView: 'table',
+    editWithModal: false
 }, action) {
     switch (action.type) {
         case 'FILTER_CONFIGURATIONS': {
@@ -58,6 +59,9 @@ export default function reducer(state = {
         }
         case 'CHANGE_CONFIGURATION_VIEW': {
             return { ...state, configurationView: action.payload };
+        }
+        case 'CHANGE_MODAL_EDIT': {
+            return { ...state, editWithModal: action.payload };
         }
         default:
             return state;
