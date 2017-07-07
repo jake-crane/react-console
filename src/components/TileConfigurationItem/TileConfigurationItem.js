@@ -67,7 +67,7 @@ class TileConfigurationItem extends ConfigurationItemBase {
                         handleTypeChange={this.handleTypeChange.bind(this)}
                         keyName={this.props.keyName}
                         name={this.props.name}
-                        value={this.props.name}
+                        value={this.props.value}
                         description={this.props.description}
                         type={this.props.type}
                         tempData={this.state.tempData}
