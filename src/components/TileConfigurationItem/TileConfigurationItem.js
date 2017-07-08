@@ -56,6 +56,11 @@ class TileConfigurationItem extends ConfigurationItemBase {
                                     Cancel
                                 </button>
                                 <button type="button"
+                                    onClick={this.handleRemoveClick.bind(this)}
+                                    className="remove btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                                <button type="button"
                                     onClick={this.handleUpdate.bind(this)}
                                     className="update btn btn-primary btn-sm">
                                     Update

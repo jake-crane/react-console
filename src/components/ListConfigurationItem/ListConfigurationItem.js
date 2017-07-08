@@ -49,7 +49,6 @@ class ListConfigurationItem extends ConfigurationItemBase {
                             <td className="buttonColumn">
                                 <button className="btn btn-danger btn-xs glyphicon glyphicon-ban-circle" onClick={this.handleCancel.bind(this)}></button>
                                 <button className="btn btn-primary btn-xs glyphicon glyphicon-floppy-disk" onClick={this.handleUpdate.bind(this)}></button>
-
                             </td>
                         }
                     </tr>
@@ -63,6 +62,7 @@ class ListConfigurationItem extends ConfigurationItemBase {
                         <td className="typeColumn">{this.props.type}</td>
                         <td className="buttonColumn">
                             <button className="btn btn-primary btn-xs glyphicon glyphicon-pencil" onClick={this.handleClick.bind(this)}></button>
+                            <button className="btn btn-danger btn-xs glyphicon glyphicon-remove" onClick={this.handleRemoveClick.bind(this)}></button>
                         </td>
                         <td hidden>
                             {this.props.editMode && this.props.editWithModal && this.getConfigurationEditModal()}

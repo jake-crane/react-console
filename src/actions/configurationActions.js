@@ -44,6 +44,13 @@ export function addConfiguration(configuration) {
     };
 }
 
+export function removeConfiguration(configurationId) {
+    return {
+        type: 'REMOVE_CONFIGURATION',
+        payload: configurationId 
+    };
+}
+
 export function editConfiguration(configurationId) {
     return {
         type: 'EDIT_CONFIGURATION',

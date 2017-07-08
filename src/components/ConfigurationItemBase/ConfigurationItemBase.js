@@ -1,5 +1,5 @@
 import React from "react";
-import { editConfiguration, cancelConfigurationEdit, updateConfiguration, addConfiguration } from '../../actions/configurationActions';
+import { editConfiguration, cancelConfigurationEdit, updateConfiguration, addConfiguration, removeConfiguration } from '../../actions/configurationActions';
 import ConfigurationEditModal from "../ConfigurationEditModal/ConfigurationEditModal";
 
 export default class ConfigurationItemBase extends React.Component {
@@ -133,6 +133,10 @@ export default class ConfigurationItemBase extends React.Component {
         this.props.addConfiguration(updatedData);
         this.clearTempData();
     }
+    
+    handleRemoveClick(e) {
+        this.props.removeConfiguration(this.props.id);
+    }
 
     getConfigurationEditModal() {
         return (<ConfigurationEditModal
@@ -164,7 +168,8 @@ export default class ConfigurationItemBase extends React.Component {
             editConfiguration: (configurationId) => dispatch(editConfiguration(configurationId)),
             cancelConfigurationEdit: (configurationId) => dispatch(cancelConfigurationEdit(configurationId)),
             updateConfiguration: (configuration) => dispatch(updateConfiguration(configuration)),
-            addConfiguration: (configuration) => dispatch(addConfiguration(configuration))
+            addConfiguration: (configuration) => dispatch(addConfiguration(configuration)),
+            removeConfiguration: (configuration) => dispatch(removeConfiguration(configuration))
         };
     };
 }
