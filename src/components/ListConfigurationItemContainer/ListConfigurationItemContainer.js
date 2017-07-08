@@ -37,6 +37,15 @@ class ListConfigurationItemContainer extends React.Component {
                                 editMode={data.editMode}
                                 hidden={data.hidden} />
                         )}
+                       <ListConfigurationItem key={''}
+                                keyName={''}
+                                name={''}
+                                value={''}
+                                type={'TEXT'}
+                                description={''}
+                                id={null}
+                                editMode={true}
+                                hidden={false} />
                     </tbody>
                 </table>
             </div>

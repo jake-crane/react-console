@@ -9,8 +9,11 @@ class TileConfigurationItem extends ConfigurationItemBase {
         return this.props.editMode && !this.props.editWithModal ?
             (
                 <div className="tileConfigurationItem" hidden={this.props.hidden}>
-                    <span>Key: </span>
-                    <span>{this.props.keyName}</span>
+                    <div>Key</div>
+                    <input
+                        className="keyName"
+                        value={this.state.tempData.key || this.props.keyName}
+                        onChange={this.handleKeyChange.bind(this)} />
                     <div>Name</div>
                     <input
                         className="itemName"
@@ -36,18 +39,29 @@ class TileConfigurationItem extends ConfigurationItemBase {
                             <option value="ENC_PASSWORD">ENC_PASSWORD</option>
                         </select>
                     </div>
-                    <div className="buttonContainer">
-                        <button type="button"
-                            onClick={this.handleCancel.bind(this)}
-                            className="cancel btn btn-default btn-sm">
-                            Cancel
+                    {
+                        this.props.id === null ?
+                            <div className="buttonContainer">
+                                <button type="button"
+                                    onClick={this.handleAddClick.bind(this)}
+                                    className="update btn btn-success btn-sm">
+                                    Add
                                 </button>
-                        <button type="button"
-                            onClick={this.handleUpdate.bind(this)}
-                            className="update btn btn-primary btn-sm">
-                            Update
+                            </div>
+                            :
+                            <div className="buttonContainer">
+                                <button type="button"
+                                    onClick={this.handleCancel.bind(this)}
+                                    className="cancel btn btn-default btn-sm">
+                                    Cancel
                                 </button>
-                    </div>
+                                <button type="button"
+                                    onClick={this.handleUpdate.bind(this)}
+                                    className="update btn btn-primary btn-sm">
+                                    Update
+                                </button>
+                            </div>
+                    }
                 </div>
             ) :
             (
@@ -56,7 +70,7 @@ class TileConfigurationItem extends ConfigurationItemBase {
                         <span className="itemName" title={this.props.keyName}>{this.props.name || this.props.keyName}</span>
                         <div className="description">{this.props.description}</div>
                     </a>
-                     {this.getConfigurationEditModal()}
+                    {this.props.editMode && this.props.editWithModal && this.getConfigurationEditModal()}
                 </div>
             );
     }

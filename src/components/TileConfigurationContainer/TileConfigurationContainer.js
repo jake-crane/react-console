@@ -25,6 +25,15 @@ class ConfigurationListContainer extends React.Component {
                         editMode={data.editMode}
                         hidden={data.hidden} />
                 )}
+                <TileConfigurationItem key={''}
+                    keyName={''}
+                    name={''}
+                    value={''}
+                    type={'TEXT'}
+                    description={''}
+                    id={null}
+                    editMode={true}
+                    hidden={false} />
             </div>
         );
     }

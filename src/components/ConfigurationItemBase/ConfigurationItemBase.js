@@ -1,5 +1,5 @@
 import React from "react";
-import { editConfiguration, cancelConfigurationEdit, updateConfiguration } from '../../actions/configurationActions';
+import { editConfiguration, cancelConfigurationEdit, updateConfiguration, addConfiguration } from '../../actions/configurationActions';
 import ConfigurationEditModal from "../ConfigurationEditModal/ConfigurationEditModal";
 
 export default class ConfigurationItemBase extends React.Component {
@@ -48,6 +48,20 @@ export default class ConfigurationItemBase extends React.Component {
         };
         this.props.updateConfiguration(updatedData);
         this.clearTempData();
+    }
+
+    handleKeyChange(e) {
+        var newState = {
+            tempData: {
+                name: this.state.tempData.name,
+                key: e.target.value,
+                value: this.state.tempData.value,
+                description: this.state.tempData.description,
+                type: this.state.tempData.type,
+                id: this.props.id
+            }
+        };
+        this.setState(newState);
     }
 
     handleNameChange(e) {
@@ -106,6 +120,20 @@ export default class ConfigurationItemBase extends React.Component {
         this.setState(newState);
     }
 
+    handleAddClick(e) {
+        var updatedData = {
+            name: this.state.tempData.name,
+            key: this.state.tempData.key,
+            value: this.state.tempData.value,
+            description: this.state.tempData.description,
+            type: this.state.tempData.type,
+            id: Math.floor(Math.random() * 1000000) + 1,
+            editMode: false
+        };
+        this.props.addConfiguration(updatedData);
+        this.clearTempData();
+    }
+
     getConfigurationEditModal() {
         return (<ConfigurationEditModal
             isOpen={this.props.editMode && this.props.editWithModal}
@@ -135,7 +163,8 @@ export default class ConfigurationItemBase extends React.Component {
         return {
             editConfiguration: (configurationId) => dispatch(editConfiguration(configurationId)),
             cancelConfigurationEdit: (configurationId) => dispatch(cancelConfigurationEdit(configurationId)),
-            updateConfiguration: (configuration) => dispatch(updateConfiguration(configuration))
+            updateConfiguration: (configuration) => dispatch(updateConfiguration(configuration)),
+            addConfiguration: (configuration) => dispatch(addConfiguration(configuration))
         };
     };
 }

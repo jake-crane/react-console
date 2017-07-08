@@ -10,7 +10,12 @@ class ListConfigurationItem extends ConfigurationItemBase {
             this.props.editMode && !this.props.editWithModal ?
                 (
                     <tr className="listConfigurationItem" hidden={this.props.hidden}>
-                        <td>{this.props.keyName}</td>
+                        <td>
+                            <input
+                                className="keyName"
+                                value={this.state.tempData.key || this.props.keyName}
+                                onChange={this.handleKeyChange.bind(this)} />
+                        </td>
                         <td>
                             <input
                                 className="itemName"
@@ -36,10 +41,17 @@ class ListConfigurationItem extends ConfigurationItemBase {
                                 <option value="ENC_PASSWORD">ENC_PASSWORD</option>
                             </select>
                         </td>
-                        <td className="buttonColumn">
-                            <button className="btn btn-danger btn-xs glyphicon glyphicon-ban-circle" onClick={this.handleCancel.bind(this)}></button>
-                            <button className="btn btn-primary btn-xs glyphicon glyphicon-floppy-disk" onClick={this.handleUpdate.bind(this)}></button>
-                        </td>
+                        {this.props.id === null ?
+                            <td className="buttonColumn">
+                                <button className="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.handleAddClick.bind(this)}></button>
+                            </td>
+                            :
+                            <td className="buttonColumn">
+                                <button className="btn btn-danger btn-xs glyphicon glyphicon-ban-circle" onClick={this.handleCancel.bind(this)}></button>
+                                <button className="btn btn-primary btn-xs glyphicon glyphicon-floppy-disk" onClick={this.handleUpdate.bind(this)}></button>
+
+                            </td>
+                        }
                     </tr>
                 ) :
                 (
@@ -53,7 +65,7 @@ class ListConfigurationItem extends ConfigurationItemBase {
                             <button className="btn btn-primary btn-xs glyphicon glyphicon-pencil" onClick={this.handleClick.bind(this)}></button>
                         </td>
                         <td hidden>
-                           {this.getConfigurationEditModal()}
+                            {this.props.editMode && this.props.editWithModal && this.getConfigurationEditModal()}
                         </td>
                     </tr>
                 )
