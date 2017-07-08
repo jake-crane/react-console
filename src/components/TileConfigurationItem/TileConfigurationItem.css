@@ -11,6 +11,10 @@
     padding: 0;
 }
 
+.tileConfigurationItem input.keyName {
+    width: 100%;
+}
+
 .tileConfigurationItem input.itemName {
     width: 100%;
 }
@@ -36,9 +40,10 @@
 }
 
 .tileConfigurationItem {
+    text-align: center;
     width: 395px;
     background-color: white;
-    padding: 2px;
+    padding: 5px;
     float: left;
     margin: 0 6px 0 6px;
     overflow: hidden;
@@ -53,6 +58,11 @@
 
 .tileConfigurationItem .cancel {
     float: left;
+    margin-right: 5px;
+}
+
+.tileConfigurationItem .remove {
+    float: left;
 }
 
 .tileConfigurationItem .update {
@@ -61,6 +71,7 @@
 
 .tileConfigurationItem .buttonContainer {
    overflow: hidden;
+   margin-top: 10px;
 }
 
 .tileConfigurationItem .editLink {

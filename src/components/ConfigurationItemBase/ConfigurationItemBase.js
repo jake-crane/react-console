@@ -142,7 +142,9 @@ export default class ConfigurationItemBase extends React.Component {
         return (<ConfigurationEditModal
             isOpen={this.props.editMode && this.props.editWithModal}
             handleCancel={this.handleCancel.bind(this)}
+            handleDelete={this.handleRemoveClick.bind(this)}
             handleUpdate={this.handleUpdate.bind(this)}
+            handleKeyChange={this.handleKeyChange.bind(this)}
             handleNameChange={this.handleNameChange.bind(this)}
             handleValueChange={this.handleValueChange.bind(this)}
             handleDescriptionChange={this.handleDescriptionChange.bind(this)}

@@ -34,9 +34,13 @@ class App extends Component {
           </span>
         </div>
         <div className="container-fluid">
-          {this.props.configurationView === 'table'
-            ? <ListConfigurationItemContainer />
-            : <TileConfigurationContainer />}
+          <div className="row">
+            <div className="col-xs-12 content">
+              {this.props.configurationView === 'table'
+                ? <ListConfigurationItemContainer />
+                : <TileConfigurationContainer />}
+            </div>
+          </div>
         </div>
       </div>
     );

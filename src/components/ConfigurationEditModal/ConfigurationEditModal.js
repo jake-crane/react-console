@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { openModal, closeModal } from '../../actions/configurationActions';
-
+import './ConfigurationEditModal.css';
 const customStyles = {
     content: {
         top: '50%',
@@ -15,11 +15,6 @@ const customStyles = {
 };
 
 class ConfigurationEditModal extends Component {
-    constructor() {
-        super();
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-    }
 
     openModal() {
         this.props.openModal();
@@ -34,6 +29,11 @@ class ConfigurationEditModal extends Component {
         this.closeModal.apply(this);
     }
 
+    handleDelete(e) {
+        this.props.handleDelete();
+        this.closeModal.apply(this);
+    }
+
     handleUpdate(e) {
         this.props.handleUpdate();
         this.closeModal.apply(this);
@@ -44,27 +44,32 @@ class ConfigurationEditModal extends Component {
             <div>
                 <Modal
                     isOpen={this.props.isOpen}
-                    onRequestClose={this.closeModal}
                     style={customStyles}
-                    contentLabel="Example Modal">
-
-                    <div className="tileConfigurationItem">
-                        <span>Key: </span>
-                        <span>{this.props.keyName}</span>
+                    contentLabel="Edit Configuration">
+                    <div className="configurationEditModal">
+                        <div>Key</div>
+                        <input
+                            className="keyName"
+                            value={this.props.tempData.key
+                                || (this.props.tempData.key === '' ? '' : this.props.keyName)}
+                            onChange={this.props.handleKeyChange.bind(this)} />
                         <div>Name</div>
                         <input
                             className="itemName"
-                            value={this.props.tempData.name || this.props.name}
+                            value={this.props.tempData.name
+                                || (this.props.tempData.name === '' ? '' : this.props.name)}
                             onChange={this.props.handleNameChange} />
                         <div>Value</div>
                         <textarea className="value"
-                            value={this.props.tempData.value || this.props.value}
+                            value={this.props.tempData.value
+                                || (this.props.tempData.value === '' ? '' : this.props.value)}
                             onChange={this.props.handleValueChange}
                         ></textarea>
                         <div>
                             <div>Description</div>
                             <textarea className="description"
-                                value={this.props.tempData.description || this.props.description}
+                                value={this.props.tempData.description
+                                || (this.props.tempData.description === '' ? '' : this.props.description)}
                                 onChange={this.props.handleDescriptionChange}
                             ></textarea>
                         </div>
@@ -83,6 +88,11 @@ class ConfigurationEditModal extends Component {
                                 Cancel
                             </button>
                             <button type="button"
+                                onClick={this.handleDelete.bind(this)}
+                                className="remove btn btn-danger btn-sm">
+                                Delete
+                            </button>
+                            <button type="button"
                                 onClick={this.handleUpdate.bind(this)}
                                 className="update btn btn-primary btn-sm">
                                 Update
@@ -96,19 +106,19 @@ class ConfigurationEditModal extends Component {
 }
 
 function mapStateToProps(store) {
-  return {
-     modal: store.configurationReducer.modal
-  };
+    return {
+        modal: store.configurationReducer.modal
+    };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    openModal: () => dispatch(openModal()),
-    closeModal: () => dispatch(closeModal())
-  };
+    return {
+        openModal: () => dispatch(openModal()),
+        closeModal: () => dispatch(closeModal())
+    };
 };
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(ConfigurationEditModal);

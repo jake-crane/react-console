@@ -1,0 +1,17 @@
+.configurationEditModal {
+    width: 400px;
+    height: 260px;
+}
+
+.configurationEditModal .cancel {
+    float: left;
+    margin-right: 5px;
+}
+
+.configurationEditModal .update {
+    float: right;
+}
+
+.configurationEditModal .buttonContainer {
+    margin-top: 30px;
+}
