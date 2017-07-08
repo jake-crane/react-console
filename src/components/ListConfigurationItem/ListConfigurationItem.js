@@ -13,24 +13,28 @@ class ListConfigurationItem extends ConfigurationItemBase {
                         <td>
                             <input
                                 className="keyName"
-                                value={this.state.tempData.key || this.props.keyName}
+                                value={this.state.tempData.key
+                                    || (this.state.tempData.key === '' ? '' : this.props.keyName)}
                                 onChange={this.handleKeyChange.bind(this)} />
                         </td>
                         <td>
                             <input
                                 className="itemName"
-                                value={this.state.tempData.name || this.props.name}
+                                value={this.state.tempData.name
+                                    || (this.state.tempData.name === '' ? '' : this.props.name)}
                                 onChange={this.handleNameChange.bind(this)} />
                         </td>
                         <td>
                             <textarea className="value"
-                                value={this.state.tempData.value || this.props.value}
+                                value={this.state.tempData.value
+                                    || (this.state.tempData.value === '' ? '' : this.props.value)}
                                 onChange={this.handleValueChange.bind(this)}
                             ></textarea>
                         </td>
                         <td>
                             <textarea className="description"
-                                value={this.state.tempData.description || this.props.description}
+                                value={this.state.tempData.description
+                                    || (this.state.tempData.description === '' ? '' : this.props.description)}
                                 onChange={this.handleDescriptionChange.bind(this)}
                             ></textarea>
                         </td>
@@ -65,7 +69,7 @@ class ListConfigurationItem extends ConfigurationItemBase {
                             <button className="btn btn-primary btn-xs glyphicon glyphicon-pencil" onClick={this.handleClick.bind(this)}></button>
                         </td>
                         <td hidden>
-                            {this.props.editMode && this.props.editWithModal && this.getConfigurationEditModal()}
+                            {this.props.editMode && this.props.id !== null && this.props.editWithModal && this.getConfigurationEditModal()}
                         </td>
                     </tr>
                 )

@@ -39,10 +39,10 @@ export default class ConfigurationItemBase extends React.Component {
 
     handleUpdate(e) {
         var updatedData = {
-            name: this.state.tempData.name || this.props.name,
-            key: this.state.tempData.key || this.props.keyName,
-            value: this.state.tempData.value || this.props.value,
-            description: this.state.tempData.description || this.props.description,
+            name: this.state.tempData.name || (this.state.tempData.name === '' ? '' : this.props.name),
+            key: this.state.tempData.key || (this.state.tempData.key === '' ? '' : this.props.keyName),
+            value: this.state.tempData.value || (this.state.tempData.value === '' ? '' : this.props.value),
+            description: this.state.tempData.description || (this.state.tempData.description === '' ? '' : this.props.description),
             type: this.state.tempData.type || this.props.type,
             id: this.props.id
         };
@@ -133,7 +133,7 @@ export default class ConfigurationItemBase extends React.Component {
         this.props.addConfiguration(updatedData);
         this.clearTempData();
     }
-    
+
     handleRemoveClick(e) {
         this.props.removeConfiguration(this.props.id);
     }

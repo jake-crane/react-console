@@ -12,22 +12,26 @@ class TileConfigurationItem extends ConfigurationItemBase {
                     <div>Key</div>
                     <input
                         className="keyName"
-                        value={this.state.tempData.key || this.props.keyName}
+                        value={this.state.tempData.key
+                            || (this.state.tempData.key === '' ? '' : this.props.keyName)}
                         onChange={this.handleKeyChange.bind(this)} />
                     <div>Name</div>
                     <input
                         className="itemName"
-                        value={this.state.tempData.name || this.props.name}
+                        value={this.state.tempData.name
+                            || (this.state.tempData.name === '' ? '' : this.props.name)}
                         onChange={this.handleNameChange.bind(this)} />
                     <div>Value</div>
                     <textarea className="value"
-                        value={this.state.tempData.value || this.props.value}
+                        value={this.state.tempData.value
+                            || (this.state.tempData.value === '' ? '' : this.props.value)}
                         onChange={this.handleValueChange.bind(this)}
                     ></textarea>
                     <div>
                         <div>Description</div>
                         <textarea className="description"
-                            value={this.state.tempData.description || this.props.description}
+                            value={this.state.tempData.description
+                            || (this.state.tempData.description === '' ? '' : this.props.description)}
                             onChange={this.handleDescriptionChange.bind(this)}
                         ></textarea>
                     </div>
@@ -75,7 +79,7 @@ class TileConfigurationItem extends ConfigurationItemBase {
                         <span className="itemName" title={this.props.keyName}>{this.props.name || this.props.keyName}</span>
                         <div className="description">{this.props.description}</div>
                     </a>
-                    {this.props.editMode && this.props.editWithModal && this.getConfigurationEditModal()}
+                    {this.props.editMode && this.props.id !== null && this.props.editWithModal && this.getConfigurationEditModal()}
                 </div>
             );
     }
