@@ -6,6 +6,15 @@ import { connect } from 'react-redux';
 
 class NavBar extends React.Component {
 
+    componentWillMount() {
+        document.addEventListener("keydown", (e) => {
+            if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+                e.preventDefault();
+                this.searchInput.focus();
+            }
+        })
+    }
+
     onSearchKeypress(e) {
         this.props.filterConfigurations(e.target.value);
     }
@@ -37,7 +46,9 @@ class NavBar extends React.Component {
                             <input type="text"
                                 className="form-control"
                                 placeholder="Search..."
-                                onChange={this.onSearchKeypress.bind(this)} />
+                                onChange={this.onSearchKeypress.bind(this)}
+                                ref={(searchInput) => this.searchInput = searchInput}
+                            />
                         </form>
                     </div>
                 </div>
