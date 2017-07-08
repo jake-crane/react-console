@@ -61,8 +61,8 @@ class ListConfigurationItem extends ConfigurationItemBase {
                         <td>{this.props.description}</td>
                         <td className="typeColumn">{this.props.type}</td>
                         <td className="buttonColumn">
-                            <button className="btn btn-primary btn-xs glyphicon glyphicon-pencil" onClick={this.handleClick.bind(this)}></button>
                             <button className="btn btn-danger btn-xs glyphicon glyphicon-remove" onClick={this.handleRemoveClick.bind(this)}></button>
+                            <button className="btn btn-primary btn-xs glyphicon glyphicon-pencil" onClick={this.handleClick.bind(this)}></button>
                         </td>
                         <td hidden>
                             {this.props.editMode && this.props.editWithModal && this.getConfigurationEditModal()}

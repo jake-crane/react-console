@@ -126,7 +126,7 @@ export default class ConfigurationItemBase extends React.Component {
             key: this.state.tempData.key,
             value: this.state.tempData.value,
             description: this.state.tempData.description,
-            type: this.state.tempData.type,
+            type: this.state.tempData.type || this.props.type,
             id: Math.floor(Math.random() * 1000000) + 1,
             editMode: false
         };
