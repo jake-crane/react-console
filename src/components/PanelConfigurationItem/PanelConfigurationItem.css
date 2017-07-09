@@ -1,0 +1,81 @@
+.panelConfigurationItem .itemName {
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.panelConfigurationItem input.keyName {
+    width: 100%;
+}
+
+.panelConfigurationItem input.itemName {
+    width: 100%;
+}
+
+.panelConfigurationItem div.description {
+    font-size: .7em;
+    margin: 3px;
+    width: 100%;
+    color: #414141;
+}
+
+.panelConfigurationItem textarea.description {
+    width: 100%;
+}
+
+.panelConfigurationItem textarea.value {
+    width: 100%;
+    height: 110px;
+}
+
+.panelConfigurationItem.readonly {
+    height: 110px;
+}
+
+.panelConfigurationItem {
+    text-align: center;
+    width: 395px;
+    background-color: white;
+    float: left;
+    margin: 0 6px 3px 6px;
+    overflow: hidden;
+}
+
+.panelConfigurationItem a {
+    text-decoration: none;
+    outline: none;
+}
+
+.panelConfigurationItem .cancel {
+    float: left;
+    margin-right: 5px;
+}
+
+.panelConfigurationItem .remove {
+    float: left;
+}
+
+.panelConfigurationItem .update {
+    float: right;
+}
+
+.panelConfigurationItem .buttonContainer {
+   overflow: hidden;
+   margin-top: 10px;
+}
+
+.panelConfigurationItem .editLink {
+    display: block;
+    height: 100%;
+}
+
+.panelConfigurationItem .itemType {
+    margin-bottom: 4px;
+}
+
+.panelConfigurationItem .panel {
+    margin-bottom: 0;
+    height: 100%;
+}

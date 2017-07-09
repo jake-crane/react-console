@@ -4,6 +4,7 @@ import { changeConfigurationView, changeModalEdit } from '../../actions/configur
 import './App.css';
 import TileConfigurationContainer from "../TileConfigurationContainer/TileConfigurationContainer";
 import ListConfigurationItemContainer from "../ListConfigurationItemContainer/ListConfigurationItemContainer";
+import PanelConfigurationContainer from "../PanelConfigurationContainer/PanelConfigurationContainer";
 import NavBar from "../NavBar/NavBar";
 
 class App extends Component {
@@ -16,6 +17,20 @@ class App extends Component {
     this.props.changeModalEdit(e.target.checked);
   }
 
+  getConfigurationContainer() {
+    switch (this.props.configurationView) {
+
+      case 'table': 
+        return <ListConfigurationItemContainer />;
+      case 'tile': 
+        return <TileConfigurationContainer />
+      case 'panel': 
+        return <PanelConfigurationContainer />
+      default:
+        return null;
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -25,6 +40,7 @@ class App extends Component {
             <select value={this.props.configurationView} onChange={this.handleViewSelectionChange.bind(this)} >
               <option value="table">Table View</option>
               <option value="tile">Tile View</option>
+              <option value="panel">Panel View</option>
             </select>
             <label>
               <input className="modalCheckBox" type="checkbox"
@@ -36,9 +52,7 @@ class App extends Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-xs-12 content">
-              {this.props.configurationView === 'table'
-                ? <ListConfigurationItemContainer />
-                : <TileConfigurationContainer />}
+              {this.getConfigurationContainer()}
             </div>
           </div>
         </div>
