@@ -1,14 +1,28 @@
 import axios from 'axios';
 
+//const baseURL = 'http://linjborasp8/awdServer/awd/config/services/v1/console/';
+const baseURL = './';
+
 export function updateConfiguration(configuration) {
     return (dispatch) => {
-        //http://linjborasp8/awdServer/awd/config/services/v1/console/configurations
-        axios.put('./configurations', configuration)
+        axios.put(baseURL + 'configurations', configuration)
             .then((response) => {
                 dispatch(updateConfigurationFulfilled(configuration));
             })
             .catch((err) => {
                 dispatch(updateConfigurationRejected(err));
+            });
+    };
+}
+
+export function deleteConfiguration(configurationId) {
+    return (dispatch) => {
+        axios.get(baseURL + 'configurations/' + configurationId)
+            .then((response) => {
+                dispatch(deleteConfigurationFulfilled(configurationId));
+            })
+            .catch((err) => {
+                dispatch(deleteConfigurationRejected(err));
             });
     };
 }
@@ -44,13 +58,6 @@ export function addConfiguration(configuration) {
     };
 }
 
-export function removeConfiguration(configurationId) {
-    return {
-        type: 'REMOVE_CONFIGURATION',
-        payload: configurationId 
-    };
-}
-
 export function editConfiguration(configurationId) {
     return {
         type: 'EDIT_CONFIGURATION',
@@ -79,10 +86,17 @@ export function updateConfigurationRejected(err) {
     };
 }
 
-export function deleteConfiguration(configuration) {
+export function deleteConfigurationFulfilled(configurationId) {
     return {
-        type: 'DELETE_CONFIGURATION',
-        payload: { ...configuration }
+        type: 'DELETE_CONFIGURATION_FULFILLED',
+        payload: configurationId
+    };
+}
+
+export function deleteConfigurationRejected(err) {
+    return {
+        type: 'DELETE_CONFIGURATION_REJECTED',
+        payload: err
     };
 }
 

@@ -24,18 +24,21 @@ export default function reducer(state = {
                 configurations: action.payload.configurations
             };
         }
-        case 'ADD_CONFIGURATION': {
-            return {
-                ...state,
-                configurations: [...state.configurations, action.payload],
-            };
-        }
-        case 'REMOVE_CONFIGURATION': {
+        case 'DELETE_CONFIGURATION_FULFILLED': {
             const newConfigurations = [...state.configurations];
             const removeIndex = newConfigurations.findIndex(configuration => configuration.id === action.payload);
             if (removeIndex > -1)
                 newConfigurations.splice(removeIndex, 1);
             return { ...state, configurations: newConfigurations };
+        }
+        case 'DELETE_CONFIGURATION_REJECTED': {
+
+        }
+        case 'ADD_CONFIGURATION': {
+            return {
+                ...state,
+                configurations: [...state.configurations, action.payload],
+            };
         }
         case 'EDIT_CONFIGURATION': {
             const newConfigurations = [...state.configurations];
