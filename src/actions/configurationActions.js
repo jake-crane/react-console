@@ -1,11 +1,25 @@
 import axios from 'axios';
 
-//const baseURL = 'http://linjborasp8/awdServer/awd/config/services/v1/console/';
-const baseURL = './';
+var axiosInstance = axios.create({
+  baseURL: '../awd/config/services/v1/console/configurations/',
+  headers: {'CSRF_TOKEN': localStorage.getItem('CSRF_TOKEN')}
+});
+
+export function addConfiguration(configuration) {
+    return (dispatch) => {
+        axiosInstance.post('', configuration)
+            .then((response) => {
+                dispatch(addConfigurationFulfilled(configuration));
+            })
+            .catch((err) => {
+                dispatch(addConfigurationRejected(err));
+            });
+    };
+}
 
 export function updateConfiguration(configuration) {
     return (dispatch) => {
-        axios.put(baseURL + 'configurations', configuration)
+        axiosInstance.put(configuration.id, configuration)
             .then((response) => {
                 dispatch(updateConfigurationFulfilled(configuration));
             })
@@ -17,7 +31,7 @@ export function updateConfiguration(configuration) {
 
 export function deleteConfiguration(configurationId) {
     return (dispatch) => {
-        axios.get(baseURL + 'configurations/' + configurationId)
+        axiosInstance.delete(configurationId)
             .then((response) => {
                 dispatch(deleteConfigurationFulfilled(configurationId));
             })
@@ -29,8 +43,9 @@ export function deleteConfiguration(configurationId) {
 
 export function fetchConfigurations() {
     return (dispatch) => {
-        axios.get('./configurations.json')
+        axiosInstance.get()
             .then((response) => {
+                localStorage.setItem('CSRF_TOKEN', response.headers.csrf_token);
                 dispatch(fetchConfigurationsFulfilled(response));
             })
             .catch((err) => {
@@ -51,13 +66,6 @@ export function fetchConfigurationsRejected(err) {
     };
 }
 
-export function addConfiguration(configuration) {
-    return {
-        type: 'ADD_CONFIGURATION',
-        payload: configuration 
-    };
-}
-
 export function editConfiguration(configurationId) {
     return {
         type: 'EDIT_CONFIGURATION',
@@ -72,10 +80,24 @@ export function cancelConfigurationEdit(configurationId) {
     };
 }
 
+export function addConfigurationFulfilled(configuration) {
+    return {
+        type: 'ADD_CONFIGURATION_FULFILLED',
+        payload: configuration
+    };
+}
+
 export function updateConfigurationFulfilled(configuration) {
     return {
         type: 'UPDATE_CONFIGURATION_FULFILLED',
         payload: configuration
+    };
+}
+
+export function addConfigurationRejected(err) {
+    return {
+        type: 'ADD_CONFIGURATION_REJECTED',
+        payload: err
     };
 }
 

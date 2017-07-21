@@ -21,7 +21,7 @@ export default function reducer(state = {
                 ...state,
                 fetching: false,
                 fetched: true,
-                configurations: action.payload.configurations
+                configurations: action.payload.configuration
             };
         }
         case 'DELETE_CONFIGURATION_FULFILLED': {
@@ -34,11 +34,14 @@ export default function reducer(state = {
         case 'DELETE_CONFIGURATION_REJECTED': {
 
         }
-        case 'ADD_CONFIGURATION': {
+        case 'ADD_CONFIGURATION_FULFILLED': {
             return {
                 ...state,
                 configurations: [...state.configurations, action.payload],
             };
+        }
+        case 'ADD_CONFIGURATION_REJECTED': {
+
         }
         case 'EDIT_CONFIGURATION': {
             const newConfigurations = [...state.configurations];
