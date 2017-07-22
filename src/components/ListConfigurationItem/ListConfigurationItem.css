@@ -13,3 +13,7 @@
     width: 100%;
     height: 26px;
 }
+
+.listConfigurationItem select {
+    width: 100%;
+}
