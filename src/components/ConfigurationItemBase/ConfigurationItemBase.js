@@ -1,5 +1,5 @@
 import React from "react";
-import { editConfiguration, cancelConfigurationEdit, updateConfiguration, addConfiguration, removeConfiguration } from '../../actions/configurationActions';
+import { editConfiguration, cancelConfigurationEdit, updateConfiguration, addConfiguration, deleteConfiguration } from '../../actions/configurationActions';
 import ConfigurationEditModal from "../ConfigurationEditModal/ConfigurationEditModal";
 
 export default class ConfigurationItemBase extends React.Component {
@@ -135,7 +135,7 @@ export default class ConfigurationItemBase extends React.Component {
     }
 
     handleRemoveClick(e) {
-        this.props.removeConfiguration(this.props.id);
+        this.props.deleteConfiguration(this.props.id);
     }
 
     getConfigurationEditModal() {
@@ -171,7 +171,7 @@ export default class ConfigurationItemBase extends React.Component {
             cancelConfigurationEdit: (configurationId) => dispatch(cancelConfigurationEdit(configurationId)),
             updateConfiguration: (configuration) => dispatch(updateConfiguration(configuration)),
             addConfiguration: (configuration) => dispatch(addConfiguration(configuration)),
-            removeConfiguration: (configuration) => dispatch(removeConfiguration(configuration))
+            deleteConfiguration: (configurationId) => dispatch(deleteConfiguration(configurationId))
         };
     };
 }
