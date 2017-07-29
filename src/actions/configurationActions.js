@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 var axiosInstance = axios.create({
-  baseURL: '../awd/config/services/v1/console/configurations/',
+    //baseURL: '../awd/config/services/v1/console/configurations/',
+  baseURL: './configurations/',
   headers: {'CSRF_TOKEN': localStorage.getItem('CSRF_TOKEN')}
 });
 
@@ -19,7 +20,7 @@ export function addConfiguration(configuration) {
 
 export function updateConfiguration(configuration) {
     return (dispatch) => {
-        axiosInstance.put(configuration.id, configuration)
+        axiosInstance.put(configuration.id.toString(), configuration)
             .then((response) => {
                 dispatch(updateConfigurationFulfilled(configuration));
             })
@@ -31,7 +32,7 @@ export function updateConfiguration(configuration) {
 
 export function deleteConfiguration(configurationId) {
     return (dispatch) => {
-        axiosInstance.delete(configurationId)
+        axiosInstance.delete(configurationId.toString())
             .then((response) => {
                 dispatch(deleteConfigurationFulfilled(configurationId));
             })
