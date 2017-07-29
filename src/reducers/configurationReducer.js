@@ -32,7 +32,7 @@ export default function reducer(state = {
             return { ...state, configurations: newConfigurations };
         }
         case 'DELETE_CONFIGURATION_REJECTED': {
-
+            break;
         }
         case 'ADD_CONFIGURATION_FULFILLED': {
             return {
@@ -41,7 +41,7 @@ export default function reducer(state = {
             };
         }
         case 'ADD_CONFIGURATION_REJECTED': {
-
+            break;
         }
         case 'EDIT_CONFIGURATION': {
             const newConfigurations = [...state.configurations];
