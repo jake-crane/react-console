@@ -10,7 +10,7 @@ export function addConfiguration(configuration) {
     return (dispatch) => {
         axiosInstance.post('', configuration)
             .then((response) => {
-                dispatch(addConfigurationFulfilled(configuration));
+                dispatch(addConfigurationFulfilled(response.data));
             })
             .catch((err) => {
                 dispatch(addConfigurationRejected(err));
