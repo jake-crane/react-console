@@ -2,8 +2,7 @@ import axios from 'axios';
 
 var axiosInstance = axios.create({
     //baseURL: '../awd/config/services/v1/console/configurations/',
-  baseURL: './configurations/',
-  headers: {'CSRF_TOKEN': localStorage.getItem('CSRF_TOKEN')}
+    baseURL: './configurations/',
 });
 
 export function addConfiguration(configuration) {
@@ -46,7 +45,7 @@ export function fetchConfigurations() {
     return (dispatch) => {
         axiosInstance.get()
             .then((response) => {
-                localStorage.setItem('CSRF_TOKEN', response.headers.csrf_token);
+                axiosInstance.defaults.headers.common['CSRF_TOKEN'] = response.headers.csrf_token;
                 dispatch(fetchConfigurationsFulfilled(response));
             })
             .catch((err) => {
@@ -57,13 +56,15 @@ export function fetchConfigurations() {
 
 export function fetchConfigurationsFulfilled(response) {
     return {
-        type: 'FETCH_CONFIGURATIONS_FULFILLED', payload: response.data
+        type: 'FETCH_CONFIGURATIONS_FULFILLED',
+        payload: response.data
     };
 }
 
 export function fetchConfigurationsRejected(err) {
     return {
-        type: 'FETCH_CONFIGURATIONS_REJECTED', payload: err
+        type: 'FETCH_CONFIGURATIONS_REJECTED',
+        payload: err
     };
 }
 
